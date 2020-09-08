@@ -1,0 +1,16 @@
+use master;
+create database Test
+go
+use Test;
+create table Photo(
+Id int identity(1,1) constraint Photo_PK primary key,
+Photo varbinary(max)
+);
+create table Human(
+Id int identity(1,1) constrait Human_PK primary key,
+Name nvarchar(70),
+Photo_Id int constrait Human_FK foreign key
+refrences Photo(Id),
+Age int
+)
+go

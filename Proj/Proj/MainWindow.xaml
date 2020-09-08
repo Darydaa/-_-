@@ -1,0 +1,152 @@
+﻿<Window x:Class="Proj.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proj"
+        mc:Ignorable="d"
+        Title="КиноИнфо" Height="450" Width="800" Background="LavenderBlush">
+    <Window.Resources>
+        <Style x:Key="PinkRadioButton" TargetType="RadioButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="17" />
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Canvas Grid.Column="0" x:Name="Canvas" Width="17" Height="17" >
+                                <Ellipse   Fill="Gray"   Width="17"  Height="17"/>
+                                <Ellipse   Fill="Snow" Canvas.Left="1" Canvas.Top="1" Width="15" Height="15"/>
+
+                            </Canvas>
+                            <TextBlock Grid.Column="1" Margin="5,0,0,0" FontSize="{TemplateBinding FontSize}" Text="{TemplateBinding Content}"></TextBlock>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="RadioButton">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="17" />
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Canvas Grid.Column="0" x:Name="Canvas" Width="17" Height="17" >
+                                        <Ellipse  Fill="Gray"   Width="17"  Height="17"/>
+                                        <Ellipse   Fill="Snow" Canvas.Left="1" Canvas.Top="1" Width="15" Height="15"/>
+                                        <Ellipse   Fill="LightPink" Canvas.Left="3" Canvas.Top="3" Width="11" Height="11"/>
+                                    </Canvas>
+                                    <TextBlock Grid.Column="1" Margin="5,0,0,0" FontSize="{TemplateBinding FontSize}" Text="{TemplateBinding Content}"></TextBlock>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Background="LightPink">
+        <Grid Visibility="Visible"  x:Name="loginGrid">
+
+            <Border  Width="320" Height="250" BorderBrush="LavenderBlush"  BorderThickness="5" CornerRadius="40" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Вход" FontSize="30" Foreground="LavenderBlush" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Width="280" Height="50" Grid.Row="1" x:Name="login"  Text="Введите логин..." FontSize="18" Foreground="Gray"   Background="LavenderBlush" />
+                    <PasswordBox Width="280" Height="50" Grid.Row="2" x:Name="password"  FontSize="18" Foreground="Gray"   Background="LavenderBlush" />
+                    <Button Width="120" Height="40" x:Name="serchUser" Grid.Row="3" FontSize="18" Content="Готово!" Background="LavenderBlush" Click="serchUser_Click"  />
+
+                </Grid>
+            </Border>
+            <Button Width="120" Margin="0 0 20 20 " Height="40" FontSize="18" Content="Регистрация"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="LavenderBlush" Click="Register"  />
+
+        </Grid>
+
+
+       
+            <Grid Visibility="Hidden"  x:Name="registrationGrid">
+
+                <Border  Width="320" Height="250" BorderBrush="LavenderBlush"  BorderThickness="5" CornerRadius="40" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Регистрация" FontSize="30" Foreground="LavenderBlush" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBox Width="280" Height="50" Grid.Row="1" x:Name="loginUs"  Text="Введите логин..." FontSize="18" Foreground="Gray"   Background="LavenderBlush" />
+                        <TextBox Width="280" Height="50" Grid.Row="2" x:Name="passwordUs"  Text="Введите пароль..." FontSize="18" Foreground="Gray"  Background="LavenderBlush" />
+                        <Button Width="120" Height="40" Grid.Row="3" FontSize="18" Content="Готово!" Background="LavenderBlush" Click="ClientAdd"  />
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+     
+
+        <Grid x:Name="searchGrid" Visibility="Hidden"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="394*"/>
+                        <ColumnDefinition Width="121*"/>
+                        <ColumnDefinition Width="278*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="Input" Grid.Column="0" Margin="10,12" TextWrapping="Wrap" Text="Введите название..." FontSize="17" Foreground="Gray"   Background="LavenderBlush"/>
+                    <Grid x:Name="Panel" Grid.Column="1" Margin="2,0,1.333,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <RadioButton Style="{StaticResource PinkRadioButton}" Grid.Row="0" x:Name="Button_Movie" FontSize="15" Margin="20,0,0,0" Content="Фильм"   Height="22"/>
+                        <RadioButton Style="{StaticResource PinkRadioButton}" Grid.Row="1" x:Name="Button_TV" Content="Сериал" Margin="20,0,0,0" FontSize="15"   Height="22"/>
+                    </Grid>
+                    <Button x:Name="Button_Search" Grid.Column="2" FontSize="18" Content="Поиск" Background="LavenderBlush" Click="ClientSend" Margin="70.667,12,72.333,12" />
+                </Grid>
+            <WebBrowser Grid.Row="1" x:Name="Browser" ScrollViewer.CanContentScroll="True" Height="auto" Margin="10" />
+        </Grid>
+        
+        <Grid x:Name="admin" Visibility="Hidden">
+
+            <Border  Width="400" Height="320" BorderBrush="LavenderBlush"  BorderThickness="5" CornerRadius="40" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Изменение API-ключа" FontSize="30" Foreground="LavenderBlush" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Старый API-ключ:" Grid.Row="1" FontSize="25" Foreground="LavenderBlush" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="oldKey" Width="380" Height="50" Grid.Row="2"   FontSize="18" Foreground="Gray"   Background="LavenderBlush" />
+                    <TextBlock Text="Новый API-ключ:" Grid.Row="3" FontSize="25" Foreground="LavenderBlush" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBox Width="380" x:Name="newKey" Height="50" Grid.Row="4"   FontSize="18" Foreground="Gray"  Background="LavenderBlush" />
+                    <Button Width="120" Height="40" Grid.Row="5" FontSize="18" Content="Готово!" Background="LavenderBlush" Click="Button_Click"   />
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+    </Grid>
+</Window>
